@@ -1,5 +1,22 @@
 
 
+## Repo structure
+
+ds-25-movie-recommendation/
+├── frontend/ # Streamlit web application
+│ ├── init.py
+│ └── main.py # Main Streamlit app entry point
+├── server/ # Backend services and API logic
+│ └── init.py
+├── scripts/ # Utility scripts
+│ └── run_local.sh # Local development runner
+├── docker-compose.yml # Docker services configuration
+├── Dockerfile # Container build instructions
+├── pyproject.toml # Poetry dependencies and project config
+├── poetry.lock # Locked dependency versions
+└── README.md # Project documentation
+
+
 ## Setup
 All code is specific for MacOS. For other OSs such as linux, please adjust accordingly.
 
