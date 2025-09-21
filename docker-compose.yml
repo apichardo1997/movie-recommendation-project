@@ -1,0 +1,12 @@
+
+services:
+  frontend:
+    build: .
+    command: bash -c "streamlit run frontend/main.py --server.port 8081"
+    environment:
+      - PYTHONUNBUFFERED=1  # Add this line
+    volumes:
+      - ./server:/code/server
+      - ./frontend:/code/frontend
+    ports:
+      - "8081:8081"

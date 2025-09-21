@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "ds-25-movie-recommendation"
+version = "0.1.0"
+description = ""
+authors = ["Richard Knudsen <richard.knudsen@me.com>"]
+readme = "README.md"
+packages = [
+    {include = "server"},
+    {include = "frontend"}
+]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+streamlit = "^1.49.1"
+pre-commit = "^4.3.0"
+ruff = "^0.13.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
