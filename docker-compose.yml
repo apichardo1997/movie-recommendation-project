@@ -4,9 +4,24 @@ services:
     build: .
     command: bash -c "streamlit run frontend/main.py --server.port 8081"
     environment:
-      - PYTHONUNBUFFERED=1  # Add this line
+      - PYTHONUNBUFFERED=1
     volumes:
       - ./server:/code/server
       - ./frontend:/code/frontend
     ports:
       - "8081:8081"
+  postgres:
+    hostname: ${POSTGRES_HOST}
+    image: postgres:latest
+    container_name: postgres_container1
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - ${POSTGRES_EXPOSED_PORT}:${POSTGRES_PORT}
+
+volumes:
+  pgdata:
