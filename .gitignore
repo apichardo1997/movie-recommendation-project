@@ -4,3 +4,9 @@
 # Python
 __pycache__/
 .python-version
+
+# env files
+.env
+
+# other
+.DS_Store
