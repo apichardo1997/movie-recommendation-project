@@ -7,7 +7,7 @@ You are tasked to build the data architecture for a movie recommendation product
 ## Tasks
 
 1. Build the database in postgres
-    1. Download the [movielens](https://grouplens.org/datasets/movielens/latest/) dataset. Use the full dataset if you are comfortable; use the small version otherwise, particularly if you are experiencing performance issues. The choice here won't affect your grade.
+    1. Download the [movielens](https://grouplens.org/datasets/movielens/latest/) dataset. Use the full dataset if you are comfortable; use the small version otherwise, particularly if you are experiencing performance issues. The choice here won't affect your grade. As a reference, full data ingestion costs me approx 6 min with the full version, the analytical queries a few seconds. 
     2. Design and implement a database in postgres that contains the data from the following 2 csv files: movies, ratings. Follow the best practices for relational database design in postgres that you have learned in the course so far. 
     3. Ingest the data from the 2 csv files into your database (e.g. via an SQL script, or the pgadmin import function)
 2. Perform the following exploratory analyses: 
