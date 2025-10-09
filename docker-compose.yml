@@ -22,6 +22,15 @@ services:
       - pgdata:/var/lib/postgresql/data
     ports:
       - ${POSTGRES_EXPOSED_PORT}:${POSTGRES_PORT}
+  backend:
+    build: .
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./server:/code/server
+      - ./frontend:/code/frontend
+      - ./scripts:/code/scripts
+      - ./.env/:/code/.env
 
 volumes:
   pgdata:
