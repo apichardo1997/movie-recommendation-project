@@ -31,6 +31,8 @@ services:
       - ./frontend:/code/frontend
       - ./scripts:/code/scripts
       - ./.env/:/code/.env
+      - ./alembic:/code/alembic
+      - ./.alembic.ini:/code/alembic.ini
 
 volumes:
   pgdata:

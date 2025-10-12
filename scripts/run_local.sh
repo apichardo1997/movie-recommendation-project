@@ -1,2 +1,2 @@
 #!/bin/bash
-docker-compose up postgres frontend
+docker compose up --build
