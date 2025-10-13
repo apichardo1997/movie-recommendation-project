@@ -1,2 +1,2 @@
 #!/bin/bash
-docker compose run --rm api alembic upgrade head
+docker compose run --rm backend alembic upgrade head
