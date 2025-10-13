@@ -1,0 +1,1 @@
+Exercise 2.2 is a good test of your indexing strategy. E.g. with the exemplary solution using the full dataset, the query processes almost 34M ratings involving an aggregation and filtering, but still terminates in less than 5s - quite powerful, and this on a single machine. 
