@@ -33,6 +33,7 @@ services:
       - ./.env/:/code/.env
       - ./alembic:/code/alembic
       - ./alembic.ini:/code/alembic.ini
+      - ./data:/code/data
 
 volumes:
   pgdata:
