@@ -199,5 +199,5 @@ def main(data_directory: Path):
 
 
 if __name__ == "__main__":
-    data_directory = Path("data/small")
+    data_directory = Path("data/large")
     main(data_directory)
