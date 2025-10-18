@@ -38,36 +38,34 @@ def cleanup():
 
 
 def load_raw_data(data_dir: Path):
-    """Load CSV data into raw tables"""
+    """Load CSV data into raw tables using bulk operations"""
     logger.info("Loading raw data from CSV files...")
 
-    # Load movies CSV
-    movies_df = pd.read_csv(data_dir / "movies.csv")  # type: ignore
-    logger.info(f"Loaded {len(movies_df)} movies")
-
-    # Load ratings CSV
-    ratings_df = pd.read_csv(data_dir / "ratings.csv")  # type: ignore
-    logger.info(f"Loaded {len(ratings_df)} ratings")
+    # Load movies CSV in chunks to avoid memory issues
+    chunk_size = 1_000_000
+    movies_chunks = pd.read_csv(data_dir / "movies.csv", chunksize=chunk_size)  # type: ignore
+    ratings_chunks = pd.read_csv(data_dir / "ratings.csv", chunksize=chunk_size)  # type: ignore
 
     with session_manager.open_session() as session:
-        # Clear existing raw data
-        session.query(MoviesRawModel).delete()
-        session.query(RatingsRawModel).delete()
+        # Process movies in chunks
+        total_movies = 0
+        for chunk in movies_chunks:
+            movies_dicts = chunk.to_dict("records")  # type: ignore
+            session.bulk_insert_mappings(MoviesRawModel, movies_dicts)  # type: ignore
+            total_movies += len(movies_dicts)  # type: ignore
+            logger.info(f"Loaded {total_movies} movies so far...")
 
-        # Insert movies raw data
-        movies_raw: list[MoviesRawModel] = []
-        for _, row in movies_df.iterrows():
-            row_dict = row.to_dict()  # type: ignore
-            movies_raw.append(MoviesRawModel(**row_dict))
-        session.add_all(movies_raw)
+        # Process ratings in chunks
+        total_ratings = 0
+        for chunk in ratings_chunks:
+            ratings_dicts = chunk.to_dict("records")  # type: ignore
+            session.bulk_insert_mappings(RatingsRawModel, ratings_dicts)  # type: ignore
+            total_ratings += len(ratings_dicts)  # type: ignore
+            logger.info(f"Loaded {total_ratings} ratings so far...")
 
-        # Insert ratings raw data
-        ratings_raw: list[RatingsRawModel] = []
-        for _, row in ratings_df.iterrows():
-            row_dict = row.to_dict()  # type: ignore
-            ratings_raw.append(RatingsRawModel(**row_dict))
-        session.add_all(ratings_raw)
-    logger.info("Raw data loaded successfully")
+    logger.info(
+        f"Raw data loaded successfully: {total_movies} movies, {total_ratings} ratings"
+    )
 
 
 def populate_users():

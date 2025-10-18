@@ -89,12 +89,10 @@ def main():
         for i, (genre, avg_rating) in enumerate(results1, 1):
             f.write(f"{i}. {genre}: {avg_rating:.3f}\n")
 
-        # Query 2: Polarizing movies (try 1000, fallback to 100)
+        # Query 2: Polarizing movies
         f.write("\n## 2. Most Polarizing Movies by Standard Deviation\n\n")
         results2 = query_most_polarizing_movies(1000)
-        if not results2:
-            results2 = query_most_polarizing_movies(100)
-            f.write("*(Using minimum 100 ratings)*\n\n")
+        f.write("*(Using minimum 1000 ratings)*\n\n")
 
         for i, (title, stddev) in enumerate(results2, 1):
             f.write(f"{i}. {title}: {stddev:.3f}\n")
