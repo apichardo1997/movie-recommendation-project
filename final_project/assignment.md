@@ -44,14 +44,14 @@ As previously, you can either use the small or the big dataset for this task.
         1. `POST api/rest/v1/recommendation-engine`. The endpoint to train a recommendation model based on the latest user data in the DB. Empty response.
             1. For the simple prototype, use something quick and simple that works, e.g non-negative matrix factorization in the sklearn implementation. Do not spend any time on model optimization unless you are adventerous.
             2. This endpoint should train and store the latest model somewhere (e.g. in a new database table, in a local directory in your application to mock a datalake, or similar). In the future we may want to support versioning, so this endpoint should not just overwrite the previous model.
-        2. `GET api/rest/v1/user/{id}/recommended-movies`. The endpoint to get the recommended movies for each user:
+        2. `GET api/rest/v1/user/{id}/recommended-movies`. The endpoint to get the recommended movies for each user based on the latest trained model:
             1. This endpoint shall support the query parameter `n`, e.g. `GET api/rest/v1/user/{id}/recommended-movies?n=10`, for the amount of movies, defaulting to `10`.
             2. We neglect for now that in a production setting, we will want to filter out those movies that the user has already seen.
             3. It should return an array of ids of the movies with highest probability that the user will like them, starting with the highest one:
             ```json
                 {
                     "movie_ids": [1, 2, ...],
-                    "probabilities": [0.1, 0.8, ...]
+                    "probabilities": [0.1, 0.08, ...]
                 }
             ```
 3. Bonus:
