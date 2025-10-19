@@ -10,7 +10,7 @@ As previously, you can either use the small or the big dataset for this task.
     1. Movies
         1. `GET api/rest/v1/movies`. The listing endpoint for movies. This endpoint shall support the following query parameters:
             1. `limit` and `page` for pagination, e.g. `GET api/rest/v1/movies?limit=10&page=1`, with defaults as seen in example path (10, 1)
-            2. `search` (optional), e.g. `GET api/rest/v1/movies?limit=10&page=1&search=thriller`, in which the search parameter performs a text search across `Movie.title` and `Genre.name`. Design the search according to what you think works best in a movie search page.
+            2. `search` (optional), e.g. `GET api/rest/v1/movies?limit=10&page=1&search=thriller`, in which the search parameter performs a text search across `Movie.title` and `Genre.genre_name`. Design the search according to what you think works best in a movie search page.
             3. Response schema:
             ```json
             {
@@ -64,8 +64,8 @@ As previously, you can either use the small or the big dataset for this task.
 To be delivered in a PR in your forked repo:
 1. A fully working prototype in the style of previous homeworks. This includes but may not be limited to the following:
     1. `server/app.py` - the fastAPI app.
-    2. `server/app/routers/*` - the routers corresponding to the endpoints to be implemented. One python module for each top-level route, so `server/app/routers/movies.py`, `server/app/routers/ratings.py`, ...
-    3. `server/app/services/*` - the service modules containing the services and the datamanagers, following the structure of the routers.
+    2. `server/routers/*` - the routers corresponding to the endpoints to be implemented. One python module for each top-level route, so `server/routers/movies.py`, `server/routers/ratings.py`, ...
+    3. `server/services/*` - the service modules containing the services and the datamanagers, following the structure of the routers.
     4. `server/schemas/*` - the pydantic schemas corresponding to the models that your services and routers use, so `Movie`, `Genre`, ...
 2. A short explanation explaining what you did in `final_project/solution/explanation.md`
 
