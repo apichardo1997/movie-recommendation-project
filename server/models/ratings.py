@@ -29,14 +29,16 @@ class RatingModel(BaseSQLModel):
         UniqueConstraint("user_id", "movie_id"),
     )
 
+    #WHY: Map rating_id attribute to the 'id' column in the database
     rating_id: Mapped[int] = mapped_column(
-        Integer, primary_key=True, autoincrement=True
+        "id", Integer, primary_key=True, autoincrement=True
     )
+    #WHY: Foreign key references users.id (the actual database column name)
     user_id: Mapped[int] = mapped_column(
-        Integer, ForeignKey("users.user_id"), nullable=False, index=True
+        Integer, ForeignKey("users.id"), nullable=False, index=True
     )
     movie_id: Mapped[int] = mapped_column(
-        Integer, ForeignKey("movies.movie_id"), nullable=False, index=True
+        Integer, ForeignKey("movies.id"), nullable=False, index=True
     )
     rating: Mapped[float] = mapped_column(Numeric(2, 1), nullable=False)
     timestamp: Mapped[datetime] = mapped_column(DateTime, nullable=False)

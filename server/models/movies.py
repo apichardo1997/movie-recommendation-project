@@ -17,13 +17,14 @@ else:
 class MovieModel(BaseSQLModel):
     __tablename__ = "movies"
 
-    movie_id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
     title: Mapped[str] = mapped_column(Text, nullable=False)
+    release_year: Mapped[int] = mapped_column(Integer, nullable=True)
 
     # Relationships
     ratings: Mapped[list[RatingModel]] = relationship(
         back_populates="movie", cascade="all, delete-orphan"
     )
     genres: Mapped[list[GenreModel]] = relationship(
-        back_populates="movies", secondary="movie_genres"
+        back_populates="movies", secondary="movie_genre"
     )

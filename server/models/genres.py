@@ -14,10 +14,10 @@ else:
 class GenreModel(BaseSQLModel):
     __tablename__ = "genres"
 
-    genre_id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
-    genre_name: Mapped[str] = mapped_column(String(50), unique=True, nullable=False)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    name: Mapped[str] = mapped_column(String(50), unique=True, nullable=False)
 
     # Relationships
     movies: Mapped[list[MovieModel]] = relationship(
-        secondary="movie_genres", back_populates="genres"
+        secondary="movie_genre", back_populates="genres"
     )

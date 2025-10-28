@@ -5,11 +5,11 @@ from server.models.base import BaseSQLModel
 
 
 class MovieGenreModel(BaseSQLModel):
-    __tablename__ = "movie_genres"
+    __tablename__ = "movie_genre"
 
     movie_id: Mapped[int] = mapped_column(
-        Integer, ForeignKey("movies.movie_id"), primary_key=True
+        Integer, ForeignKey("movies.id"), primary_key=True
     )
     genre_id: Mapped[int] = mapped_column(
-        Integer, ForeignKey("genres.genre_id"), primary_key=True, index=True
+        Integer, ForeignKey("genres.id"), primary_key=True, index=True
     )
